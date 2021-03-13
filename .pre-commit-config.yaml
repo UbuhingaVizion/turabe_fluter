@@ -1,0 +1,5 @@
+- repo: https://github.com/Cretezy/flutter-format-pre-commit
+  rev: "master"
+  hooks:
+      - id: flutter-format
+        files: lib/*
