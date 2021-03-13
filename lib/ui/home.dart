@@ -19,12 +19,16 @@ class ScaffoldExample extends StatelessWidget {
           IconButton(icon: Icon(Icons.access_alarm), onPressed: _tapButton)
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "First"),
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: "Second"),
-        BottomNavigationBarItem(icon: Icon(Icons.access_alarm), label: "Third")
-
-      ], onTap: (int index) => debugPrint("You typed on item $index"),),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: "First"),
+          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: "Second"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.access_alarm), label: "Third")
+        ],
+        onTap: (int index) => debugPrint("You typed on item $index."),
+      ),
       backgroundColor: Colors.redAccent.shade100,
       body: Container(
         alignment: Alignment.center,
