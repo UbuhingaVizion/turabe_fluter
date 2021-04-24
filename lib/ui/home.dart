@@ -7,7 +7,7 @@ import 'package:first_flutter_app/util/list-of-movies.dart';
 import 'package:first_flutter_app/model/movie.dart';
 
 class MovieListView extends StatelessWidget {
-  // final List<Movie> movieList = Movie.getMovies();
+  final List<Movie> movieList = Movie.getMovies();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MovieListView extends StatelessWidget {
       ),
       backgroundColor: Colors.blueGrey.shade400,
       body: ListView.builder(
-          itemCount: movies.length,
+          itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               elevation: 9.3,
@@ -26,22 +26,27 @@ class MovieListView extends StatelessWidget {
               child: ListTile(
                 leading: CircleAvatar(
                   child: Container(
+                    width: 200,
+                    height: 200,
                     decoration: BoxDecoration(
                       color: Colors.blue.shade500,
+                      image: DecorationImage(
+                          image: NetworkImage(movieList[index].Images[0]),
+                          fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(12.4),
                     ),
-                    child: Text("M"),
+                    child: null,
                   ),
                 ),
-                title: Text(movies[index][0]),
-                subtitle: Text("Director : ${movies[index][1]}"),
-                trailing: Text("..."),
+                title: Text(movieList[index].Title),
+                subtitle: Text("Director : ${movieList[index].Director}"),
+                trailing: Text("${movieList[index].imdbRating}"),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => MovieListViewDetails(
-                                movie: movies[index],
+                                movie: movieList[index],
                               )));
                 },
               ),
@@ -49,23 +54,41 @@ class MovieListView extends StatelessWidget {
           }),
     );
   }
+
+  Widget movieCard(Movie movie, BuildContext context) {
+    return InkWell(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 120.0,
+        child: Card(
+          color: Colors.black45,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [Text(movie.Title)],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class MovieListViewDetails extends StatelessWidget {
-  final List movie;
+  final Movie movie;
 
   MovieListViewDetails({Key key, this.movie}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Title : ${movie[0]}"),
+        title: Text("Title : ${movie.Title}"),
         backgroundColor: Colors.blueGrey.shade600,
       ),
       body: Center(
         child: Container(
           child: TextButton(
-            child: Text("Cast: ${movie[2]}"),
+            child: Text("Plot: ${movie.Plot}"),
             onPressed: () {
               Navigator.pop(context);
             },
