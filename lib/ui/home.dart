@@ -1,7 +1,80 @@
+// New route/page/screen
 import 'package:first_flutter_app/util/hexcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:first_flutter_app/util/list-of-movies.dart';
+import 'package:first_flutter_app/model/movie.dart';
+
+class MovieListView extends StatelessWidget {
+  // final List<Movie> movieList = Movie.getMovies();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Movies in 2020"),
+        backgroundColor: Colors.blueGrey.shade900,
+      ),
+      backgroundColor: Colors.blueGrey.shade400,
+      body: ListView.builder(
+          itemCount: movies.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              elevation: 9.3,
+              color: Colors.white,
+              child: ListTile(
+                leading: CircleAvatar(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade500,
+                      borderRadius: BorderRadius.circular(12.4),
+                    ),
+                    child: Text("M"),
+                  ),
+                ),
+                title: Text(movies[index][0]),
+                subtitle: Text("Director : ${movies[index][1]}"),
+                trailing: Text("..."),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MovieListViewDetails(
+                                movie: movies[index],
+                              )));
+                },
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class MovieListViewDetails extends StatelessWidget {
+  final List movie;
+
+  MovieListViewDetails({Key key, this.movie}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Title : ${movie[0]}"),
+        backgroundColor: Colors.blueGrey.shade600,
+      ),
+      body: Center(
+        child: Container(
+          child: TextButton(
+            child: Text("Cast: ${movie[2]}"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class BillSplitter extends StatefulWidget {
   @override
