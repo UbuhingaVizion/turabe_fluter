@@ -3,8 +3,14 @@ import 'package:first_flutter_app/util/hexcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:first_flutter_app/util/list-of-movies.dart';
+import 'dart:math';
 import 'package:first_flutter_app/model/movie.dart';
+
+T getRandomElement<T>(List<T> list) {
+  final random = new Random();
+  var i = random.nextInt(list.length);
+  return list[i];
+}
 
 class MovieListView extends StatelessWidget {
   final List<Movie> movieList = Movie.getMovies();
@@ -20,37 +26,12 @@ class MovieListView extends StatelessWidget {
       body: ListView.builder(
           itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              elevation: 9.3,
-              color: Colors.white,
-              child: ListTile(
-                leading: CircleAvatar(
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade500,
-                      image: DecorationImage(
-                          image: NetworkImage(movieList[index].Images[0]),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(12.4),
-                    ),
-                    child: null,
-                  ),
-                ),
-                title: Text(movieList[index].Title),
-                subtitle: Text("Director : ${movieList[index].Director}"),
-                trailing: Text("${movieList[index].imdbRating}"),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MovieListViewDetails(
-                                movie: movieList[index],
-                              )));
-                },
-              ),
-            );
+            return Stack(children: [
+              Positioned(child: movieCard(movieList[index], context)),
+              Positioned(
+                  top: 10.0,
+                  child: movieImage(getRandomElement(movieList[index].Images)))
+            ]);
           }),
     );
   }
@@ -58,17 +39,92 @@ class MovieListView extends StatelessWidget {
   Widget movieCard(Movie movie, BuildContext context) {
     return InkWell(
       child: Container(
+        margin: EdgeInsets.only(left: 45.0),
         width: MediaQuery.of(context).size.width,
         height: 120.0,
         child: Card(
           color: Colors.black45,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [Text(movie.Title)],
+          child: Padding(
+            padding: const EdgeInsets.only(
+                top: 8.0, bottom: 8.0, left: 54.0, right: 8.0),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          movie.Title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17.0,
+                              color: Colors.white),
+                        ),
+                      ),
+                      Text(
+                        "Rating ${movie.imdbRating} / 10",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            color: Colors.cyan),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Released ${movie.Released}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            color: Colors.white54),
+                      ),
+                      Text(
+                        movie.Runtime,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13.0,
+                            color: Colors.blueAccent),
+                      ),
+                      Text(
+                        movie.Rated,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13.0,
+                            color: Colors.redAccent),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
+      onTap: () => {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MovieListViewDetails(movie: movie)))
+      },
+    );
+  }
+
+  Widget movieImage(String imageUrl) {
+    return Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+              image:
+                  NetworkImage(imageUrl ?? 'https://via.placeholder.com/100'),
+              fit: BoxFit.cover)),
     );
   }
 }
