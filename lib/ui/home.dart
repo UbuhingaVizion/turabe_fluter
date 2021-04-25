@@ -19,10 +19,10 @@ class MovieListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Movies in 2020"),
+        title: Text("Movies App"),
         backgroundColor: Colors.blueGrey.shade900,
       ),
-      backgroundColor: Colors.blueGrey.shade400,
+      backgroundColor: Colors.blueGrey.shade900,
       body: ListView.builder(
           itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -66,7 +66,7 @@ class MovieListView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Rating ${movie.imdbRating} / 10",
+                        "Rating: ${movie.imdbRating}/10",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14.0,
@@ -137,18 +137,132 @@ class MovieListViewDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Title : ${movie.Title}"),
-        backgroundColor: Colors.blueGrey.shade600,
-      ),
-      body: Center(
-        child: Container(
-          child: TextButton(
-            child: Text("Plot: ${movie.Plot}"),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+        appBar: AppBar(
+          title: Text("Title: ${movie.Title}"),
+          backgroundColor: Colors.blueGrey.shade600,
+        ),
+        body: ListView(
+          children: [
+            MovieDetailsThumbnail(
+              thumbnail: getRandomElement(movie.Images),
+            ),
+            MovieDetailsHeaderWithPoster(
+              movie: movie,
+            )
+          ],
+        ));
+  }
+}
+
+class MovieDetailsThumbnail extends StatelessWidget {
+  final String thumbnail;
+
+  const MovieDetailsThumbnail({Key key, this.thumbnail}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 190.0,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: NetworkImage(thumbnail),
+                fit: BoxFit.cover,
+              )),
+            ),
+            Icon(
+              Icons.play_circle_outline,
+              size: 100.0,
+              color: Colors.white60,
+            ),
+          ],
+        ),
+        Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0x00f5f5f5), Color(0xfff5f5f5)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter)),
+          height: 80.0,
+        )
+      ],
+    );
+  }
+}
+
+class MovieDetailsHeaderWithPoster extends StatelessWidget {
+  final Movie movie;
+
+  const MovieDetailsHeaderWithPoster({Key key, this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: [
+          MoviePoster(poster: getRandomElement(movie.Images)),
+          SizedBox(
+            width: 16.0,
           ),
+          Expanded(child: MovieDetailsHeader(movie: movie))
+        ],
+      ),
+    );
+  }
+}
+
+class MovieDetailsHeader extends StatelessWidget {
+  final Movie movie;
+
+  const MovieDetailsHeader({Key key, this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "${movie.Year}, ${movie.Genre}",
+          style: TextStyle(fontWeight: FontWeight.w400, color: Colors.indigo),
+        ),
+        Text(movie.Title,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.cyan,
+                fontSize: 32.0)),
+        Text.rich(TextSpan(
+            style:
+                TextStyle(fontWeight: FontWeight.w300, color: Colors.black54),
+            children: [TextSpan(text: movie.Plot), TextSpan(text: " More...")]))
+      ],
+    );
+  }
+}
+
+class MoviePoster extends StatelessWidget {
+  final String poster;
+
+  const MoviePoster({Key key, this.poster}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var borderRadius = BorderRadius.all(Radius.circular(10.0));
+    return Card(
+      child: ClipRRect(
+        borderRadius: borderRadius,
+        child: Container(
+          width: MediaQuery.of(context).size.width / 4,
+          height: 160.0,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(poster), fit: BoxFit.cover)),
         ),
       ),
     );
