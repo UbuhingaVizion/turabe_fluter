@@ -148,6 +148,9 @@ class MovieListViewDetails extends StatelessWidget {
             ),
             MovieDetailsHeaderWithPoster(
               movie: movie,
+            ),
+            MovieDetailsCast(
+              movie: movie,
             )
           ],
         ));
@@ -240,7 +243,11 @@ class MovieDetailsHeader extends StatelessWidget {
         Text.rich(TextSpan(
             style:
                 TextStyle(fontWeight: FontWeight.w300, color: Colors.black54),
-            children: [TextSpan(text: movie.Plot), TextSpan(text: " More...")]))
+            children: [
+              TextSpan(text: movie.Plot),
+              TextSpan(
+                  text: " More...", style: TextStyle(color: Colors.redAccent))
+            ]))
       ],
     );
   }
@@ -265,6 +272,55 @@ class MoviePoster extends StatelessWidget {
                   image: NetworkImage(poster), fit: BoxFit.cover)),
         ),
       ),
+    );
+  }
+}
+
+class MovieDetailsCast extends StatelessWidget {
+  final Movie movie;
+
+  const MovieDetailsCast({Key key, this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          MovieField(field: "Cast", value: movie.Actors),
+          MovieField(field: "Directors", value: movie.Director),
+          MovieField(field: "Awards", value: movie.Awards)
+        ],
+      ),
+    );
+  }
+}
+
+class MovieField extends StatelessWidget {
+  final String field;
+  final String value;
+
+  const MovieField({Key key, this.field, this.value}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "$field : ",
+          style: TextStyle(
+              color: Colors.black87,
+              fontSize: 12.0,
+              fontWeight: FontWeight.w300),
+        ),
+        Expanded(
+            child: Text(
+          value,
+          style: TextStyle(
+              color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w300),
+        ))
+      ],
     );
   }
 }
