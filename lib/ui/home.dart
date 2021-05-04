@@ -705,11 +705,11 @@ class _QuizAppState extends State<QuizApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Umurundi"),
+        title: Text("Uri Umurundi?"),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        // backgroundColor: Colors.blueGrey,
       ),
-      backgroundColor: Colors.grey,
+      // backgroundColor: Colors.grey,
       body: Builder(
         builder: (BuildContext context) => Container(
           child: Column(
@@ -729,17 +729,13 @@ class _QuizAppState extends State<QuizApp> {
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(14.4),
                       border: Border.all(
-                          color: Colors.red, style: BorderStyle.solid)),
+                          color: Colors.grey, style: BorderStyle.solid)),
                   height: 180.0,
                   child: Center(
                       child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Text(
                       "$_currentQuestionIndex) ${questionBank[_currentQuestionIndex].questionText}",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
                     ),
                   )),
                 ),
