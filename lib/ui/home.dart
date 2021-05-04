@@ -1,4 +1,5 @@
 // New route/page/screen
+import 'package:first_flutter_app/model/questions.dart';
 import 'package:first_flutter_app/ui/movie_ui/movie_ui.dart';
 import 'package:first_flutter_app/util/hexcolor.dart';
 import 'package:first_flutter_app/util/utils.dart';
@@ -476,9 +477,9 @@ class BizCard extends StatelessWidget {
       appBar: AppBar(
         title: Text("BizCard"),
         centerTitle: true,
-        backgroundColor: Colors.black12,
+        // backgroundColor: Colors.black12,
       ),
-      backgroundColor: Colors.grey,
+      // backgroundColor: Colors.grey,
       body: Container(
         alignment: Alignment.center,
         child: Stack(
@@ -616,5 +617,197 @@ class Home extends StatelessWidget {
       )),
       color: Colors.deepOrange,
     );
+  }
+}
+
+class QuizApp extends StatefulWidget {
+  const QuizApp({Key key}) : super(key: key);
+
+  @override
+  _QuizAppState createState() => _QuizAppState();
+}
+
+class _QuizAppState extends State<QuizApp> {
+  int _currentQuestionIndex = 0;
+  List questionBank = [
+    Question.name("Burundi had its independence in 1962.", true),
+    Question.name("Burundi has the deepest lake on the planet.", false),
+    Question.name("Burundi is in East Africa.", true),
+    Question.name(
+        "Burundi is a monarchy where a king/queen rule them all.", false),
+    Question.name(
+        "Burundi has implemented a partial lockdown due to covid", true),
+    Question.name(
+        "Burundi has the best tea you can find in the whole world.", true),
+    Question.name(
+        "Burundi is the third most densely populated country in Africa after Mauritius and Rwanda.",
+        true),
+    Question.name(
+        "Majority of the population of Burundi lives in villages that are scattered throughout the highlands and ninety percent of the population is employed in agriculture.",
+        true),
+    Question.name(
+        "The traditional beer is drunk from one central pot by almost a dozen people using long straws. The practice has evolved with time and you can find people using straws in bars.",
+        true),
+    Question.name(
+        "Cattle are a symbol of health, happiness, and prosperity for the Burundians. A typical Kirundi greeting, 'Amasho,' translates as 'May you have herds of cattle'.",
+        true),
+    Question.name(
+        "Burundi is one of the oldest countries in Africa. It is also one of the few whose modern boundaries remained similar to those of the ancient Kingdoms.",
+        true),
+    Question.name(
+        "Burundi does not have a coastline but that doesn’t stop it from having a beach.",
+        true),
+    Question.name(
+        "People who are adventurous should give a visit to Mount Heha as it is the highest mountain range located in Burundi and provides an ideal place for trekking and mountain climbing.",
+        true),
+    Question.name(
+        "Burundi was initially inhabited by the Twa – a Pygmy hunter-gatherer people.",
+        true),
+    Question.name(
+        "Unlike many sub-Saharan African countries, the borders of Burundi were not created by European powers. Instead, they were conceived by the original Burundian monarchy.",
+        true),
+    Question.name(
+        "In 1890, the kingdoms of Urundi (Burundi) and neighbouring Ruanda (Rwanda) were colonised by Germany and incorporated into German East Africa.",
+        true),
+    Question.name(
+        "Burundi participated for the first time in the 1996 Olympic Games and won a gold medal.",
+        true),
+    Question.name(
+        "Burundi plays a vital role in helping us understand our own evolution as the earliest human skull in the world, dating back 2 million years, was discovered in Olduvai Gorge in Burundi by the famous East Africa archaeologis",
+        false),
+    Question.name(
+        "Burundi is the home to the largest crab in the world, the coconut crab. It is also apparently one of the tastiest crabs in the world.",
+        false),
+    Question.name(
+        "Freddie Mercury, the famous late songwriter and vocalist for the rock band ‘Queen’ was born in Gitega, Burundi..",
+        false),
+    Question.name(
+        "Almost every type of ecological system can be found on Mount Heha. This includes cultivated land, rain forest, heath, moorland, alpine desert, and an arctic summit..",
+        false),
+    Question.name(
+        "The shortest war in history was fought in 1896 in Burundi between the Belgium and Usumbura. It lasted only 45 minutes.",
+        false),
+    Question.name(
+        "The Serengeti National Park in Burundi is one of the oldest ecosystems on the planet and little has changed in the park in over 1 million years. It boasts a diversity of flora and fauna that is unavailable anywhere else in the world.",
+        false),
+    Question.name(
+        "Lake Ruvubu National Park, in Burundi, was the first park to become famous for being home to tree-climbing lions.",
+        false),
+    Question.name(
+        "Burundi is one of the last remaining places when the possibility of discovering a new species still exists. In 2003, a new monkey, the kipunji, was discovered and is extremely rare with a population of only about one thousand animals.",
+        false),
+    Question.name(
+        "Lake Tanganyika is the world’s second longest freshwater lake, the deepest and the largest in volume. It is also the largest of the African Great Lakes followed by Lake Victoria.",
+        false)
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Umurundi"),
+        centerTitle: true,
+        backgroundColor: Colors.blueGrey,
+      ),
+      backgroundColor: Colors.grey,
+      body: Builder(
+        builder: (BuildContext context) => Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Image.asset(
+                  "images/flag.png",
+                  width: 250.0,
+                  height: 180.0,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(14.4),
+                      border: Border.all(
+                          color: Colors.red, style: BorderStyle.solid)),
+                  height: 180.0,
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      "$_currentQuestionIndex) ${questionBank[_currentQuestionIndex].questionText}",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  )),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _nextQuestion(),
+                    child: Icon(Icons.arrow_back),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.blue)),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _checkAnswer(true, context),
+                    child: Text("True"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _checkAnswer(false, context),
+                    child: Text("False"),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red)),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _nextQuestion(),
+                    child: Icon(Icons.arrow_forward),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.blue)),
+                  )
+                ],
+              ),
+              Spacer()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _updateQuestion() {
+    setState(() {
+      _currentQuestionIndex =
+          questionBank.indexOf(getRandomElement(questionBank));
+    });
+  }
+
+  _nextQuestion() {
+    _updateQuestion();
+  }
+
+  _checkAnswer(bool userChoice, BuildContext context) {
+    if (userChoice == questionBank[_currentQuestionIndex].isCorrect) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.green,
+          duration: Duration(milliseconds: 800),
+          content: Text("Yes it is!")));
+      _updateQuestion();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.redAccent,
+          duration: Duration(milliseconds: 800),
+          content: Text("Of course No!")));
+      _updateQuestion();
+    }
   }
 }
