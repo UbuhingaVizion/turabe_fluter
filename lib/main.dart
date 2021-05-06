@@ -16,15 +16,17 @@ ThemeData _buildAppTheme() {
 }
 
 TextTheme _appTextTheme(TextTheme base) {
-  return base.copyWith(
-      headline1:
-          base.headline1.copyWith(fontSize: 34.0, fontWeight: FontWeight.bold),
-      headline6: base.headline6.copyWith(fontSize: 18.0),
-      button: base.button.copyWith(letterSpacing: 3.0),
-      caption:
-          base.caption.copyWith(fontWeight: FontWeight.w400, fontSize: 14.0),
-      bodyText2: base.bodyText1.copyWith(
-          fontSize: 17.0, fontFamily: "Lobster", color: Colors.white));
+  return base
+      .copyWith(
+          headline1: base.headline1
+              .copyWith(fontSize: 34.0, fontWeight: FontWeight.bold),
+          headline6: base.headline6.copyWith(fontSize: 18.0),
+          button: base.button.copyWith(letterSpacing: 3.0),
+          caption: base.caption
+              .copyWith(fontWeight: FontWeight.w400, fontSize: 14.0),
+          bodyText2: base.bodyText1.copyWith(
+              fontSize: 17.0, fontFamily: "Lobster", color: Colors.white))
+      .apply(fontFamily: "Lobster");
 }
 
 void main() => runApp(new MaterialApp(
