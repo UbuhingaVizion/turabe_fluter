@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/weather_forecast/weather_forecast.dart';
 import 'package:flutter/material.dart';
 
 import 'package:first_flutter_app/ui/home.dart';
@@ -31,5 +32,5 @@ TextTheme _appTextTheme(TextTheme base) {
 
 void main() => runApp(new MaterialApp(
       theme: _appTheme,
-      home: QuizApp(),
+      home: WeatherForecast(),
     ));
