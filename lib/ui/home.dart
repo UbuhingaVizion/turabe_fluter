@@ -30,11 +30,34 @@ class MovieListView extends StatelessWidget {
           }),
     );
   }
+  Widget textFieldView() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: TextField(
+          decoration: InputDecoration(
+              hintText: "Enter city name",
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),),
+              contentPadding: EdgeInsets.all(8.0)
+          ),
+          onSubmitted: (value){
+
+            // setState(() {
+            //   // _cityName=value;
+            //   // forecastObject= getWeather(cityName: _cityName);
+            // });
+          },
+        ),
+      ),
+    );
+  }
 
   Widget movieCard(Movie movie, BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(left: 45.0),
+        margin: EdgeInsets.only(left: 40.0),
         width: MediaQuery.of(context).size.width,
         height: 120.0,
         child: Card(
@@ -43,7 +66,7 @@ class MovieListView extends StatelessWidget {
             padding: const EdgeInsets.only(
                 top: 8.0, bottom: 8.0, left: 54.0, right: 8.0),
             child: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(2.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -56,7 +79,7 @@ class MovieListView extends StatelessWidget {
                           movie.Title,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 17.0,
+                              fontSize: 14.5,
                               color: Colors.white),
                         ),
                       ),
@@ -64,11 +87,12 @@ class MovieListView extends StatelessWidget {
                         "Rating: ${movie.imdbRating}/10",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14.0,
+                            fontSize: 12.5,
                             color: Colors.cyan),
                       )
                     ],
                   ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -79,13 +103,7 @@ class MovieListView extends StatelessWidget {
                             fontSize: 14.0,
                             color: Colors.white54),
                       ),
-                      Text(
-                        movie.Runtime,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13.0,
-                            color: Colors.blueAccent),
-                      ),
+
                       Text(
                         movie.Rated,
                         style: TextStyle(
@@ -94,7 +112,19 @@ class MovieListView extends StatelessWidget {
                             color: Colors.redAccent),
                       )
                     ],
-                  )
+                  ),  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+
+                      Text(
+                        movie.Runtime,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13.0,
+                            color: Colors.blueAccent),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
