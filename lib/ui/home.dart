@@ -24,7 +24,7 @@ class MovieListView extends StatelessWidget {
             return Stack(children: [
               Positioned(child: movieCard(movieList[index], context)),
               Positioned(
-                  top: 10.0,
+                  top: 6.0,
                   child: movieImage(getRandomElement(movieList[index].Images)))
             ]);
           }),
@@ -141,15 +141,21 @@ class MovieListView extends StatelessWidget {
   }
 
   Widget movieImage(String imageUrl) {
-    return Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-              image:
-                  NetworkImage(imageUrl ?? 'https://via.placeholder.com/100'),
-              fit: BoxFit.cover)),
+
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Container(
+        width: 80.0,
+        height: 110.0,
+
+        decoration: BoxDecoration(
+          borderRadius: BorderRadiusDirectional.circular(12.0),
+            shape: BoxShape.rectangle,
+            image: DecorationImage(
+                image:
+                    NetworkImage(imageUrl ?? 'https://via.placeholder.com/100'),
+                fit: BoxFit.cover)),
+      ),
     );
   }
 }
@@ -164,9 +170,10 @@ class MovieListViewDetails extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Title: ${movie.Title}"),
-          backgroundColor: Colors.blueGrey.shade600,
+          backgroundColor: Color(0xff131e48),
         ),
         body: ListView(
+
           children: [
             MovieDetailsThumbnail(
               thumbnail: getRandomElement(movie.Images),
@@ -183,7 +190,7 @@ class MovieListViewDetails extends StatelessWidget {
               posters: movie.Images,
             )
           ],
-        ));
+        ), backgroundColor: Color(0xff131e48),);
   }
 }
 

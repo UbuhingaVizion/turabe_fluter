@@ -52,9 +52,12 @@ class MovieDetailsHeaderWithPoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
+
         children: [
+
           MoviePoster(poster: getRandomElement(movie.Images)),
           SizedBox(
             width: 16.0,
@@ -74,11 +77,12 @@ class MovieDetailsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "${movie.Year}, ${movie.Genre}",
-          style: TextStyle(fontWeight: FontWeight.w400, color: Colors.indigo),
+          style: TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
         ),
         Text(movie.Title,
             style: TextStyle(
@@ -87,11 +91,11 @@ class MovieDetailsHeader extends StatelessWidget {
                 fontSize: 32.0)),
         Text.rich(TextSpan(
             style:
-                TextStyle(fontWeight: FontWeight.w300, color: Colors.black54),
+                TextStyle(fontWeight: FontWeight.w300, color: Colors.white60),
             children: [
               TextSpan(text: movie.Plot),
               TextSpan(
-                  text: " More...", style: TextStyle(color: Colors.redAccent))
+                  text: " More...", style: TextStyle(color: Colors.yellow))
             ]))
       ],
     );
@@ -155,15 +159,15 @@ class MovieField extends StatelessWidget {
         Text(
           "$field : ",
           style: TextStyle(
-              color: Colors.black87,
-              fontSize: 12.0,
+              color: Colors.white,
+              fontSize: 13.0,
               fontWeight: FontWeight.bold),
         ),
         Expanded(
             child: Text(
           value,
           style: TextStyle(
-              color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w300),
+              color: Colors.white60, fontSize: 12.0, fontWeight: FontWeight.w300),
         ))
       ],
     );
@@ -197,7 +201,7 @@ class MovieDetailsExtraPosters extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text("More Movie Posters".toUpperCase(),
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold)),
         ),
