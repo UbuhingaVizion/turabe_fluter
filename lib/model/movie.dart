@@ -1,5 +1,32 @@
 class Movie {
   static List<Movie> getMovies() => [
+    Movie(
+        "The Matrix",
+        "20021",
+        "PG-18",
+        "22 dec 2021",
+        "162 min",
+        "Action,fiction",
+        "Lana Wachowski",
+        "Lana Wachowski",
+        "Keanu Reeves,Christina Ricci,Carrie-Anne Moss",
+        "Lana Wachowski wrote a beautiful script and a wonderful story that resonated with me,” Reeves added. “That’s the only reason to do it. To work with her again is just amazing. It’s been really special, and the story has, I think, some meaningful things to say, and that we can take some nourishment from.",
+        "English, Spanish",
+        "USA, UK",
+        "Won 3 Oscars. Another 80 wins & 121 nominations.",
+        "https://static.independent.co.uk/2021/06/17/09/newFile-2.jpg?width=1368&auto=webp&quality=75",
+        "83",
+        "7.9",
+        "890,617",
+        "tt0499549",
+        "movie",
+        "True", [
+      "https://m.media-amazon.com/images/P/1709014571.01._SCLZZZZZZZ_SX500_.jpg",
+      "https://variety.com/wp-content/uploads/2019/08/the-matrix-keanu-reeves-carrie-ann-moss.jpg?w=681&h=383&crop=1",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/23-1597850983.jpg?crop=0.753xw:1.00xh;0.155xw,0&resize=980:*",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxOTEwNDcxN15BMl5BanBnXkFtZTcwOTg0MTUzNA@@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxMDg1Nzk1MV5BMl5BanBnXkFtZTcwMDk0MTUzNA@@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
+    ]),
         Movie(
             "Avatar",
             "2009",
