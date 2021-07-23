@@ -14,10 +14,13 @@ class MovieListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Movies App albinS"),
-        backgroundColor: Colors.blueGrey.shade900,
+
+        title: Text("Movies App albin",style: TextStyle(color: Colors.white),),
+        backgroundColor: Color(0xff131e48),
+
       ),
-      backgroundColor: Colors.blueGrey.shade900,
+      bottomNavigationBar: textFieldView(),
+      backgroundColor: Color(0xff131e40),
       body: ListView.builder(
           itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -36,7 +39,7 @@ class MovieListView extends StatelessWidget {
       child: Container(
         child: TextField(
           decoration: InputDecoration(
-              hintText: "Enter city name",
+              hintText: "Enter movie name",
               prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),),
@@ -44,10 +47,9 @@ class MovieListView extends StatelessWidget {
           ),
           onSubmitted: (value){
 
-            // setState(() {
-            //   // _cityName=value;
-            //   // forecastObject= getWeather(cityName: _cityName);
-            // });
+           // setState(() {
+             // _tipPercentage = newValue.round();
+           // });
           },
         ),
       ),
@@ -61,7 +63,7 @@ class MovieListView extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 120.0,
         child: Card(
-          color: Colors.black45,
+          color:  Color(0xff131e48),
           child: Padding(
             padding: const EdgeInsets.only(
                 top: 8.0, bottom: 8.0, left: 54.0, right: 8.0),
@@ -109,7 +111,7 @@ class MovieListView extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 13.0,
-                            color: Colors.redAccent),
+                            color: Colors.yellow),
                       )
                     ],
                   ),  Row(
@@ -169,7 +171,7 @@ class MovieListViewDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Title: ${movie.Title}"),
+          title: Text("Title: ${movie.Title}",style: TextStyle(color: Colors.white)),
           backgroundColor: Color(0xff131e48),
         ),
         body: ListView(

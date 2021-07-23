@@ -17,7 +17,7 @@ class MovieDetailsThumbnail extends StatelessWidget {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 160.0,
+              height: 120.0,
               decoration: BoxDecoration(
                   image: DecorationImage(
                 image: NetworkImage(thumbnail),
@@ -26,7 +26,7 @@ class MovieDetailsThumbnail extends StatelessWidget {
             ),
             Icon(
               Icons.play_circle_outline,
-              size: 100.0,
+              size: 80.0,
               color: Colors.white60,
             ),
           ],
@@ -37,7 +37,7 @@ class MovieDetailsThumbnail extends StatelessWidget {
                   colors: [Color(0x00f5f5f5), Color(0xfff5f5f5)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
-          height: 80.0,
+          height: 50.0,
         )
       ],
     );
@@ -91,7 +91,7 @@ class MovieDetailsHeader extends StatelessWidget {
                 fontSize: 32.0)),
         Text.rich(TextSpan(
             style:
-                TextStyle(fontWeight: FontWeight.w300, color: Colors.white60),
+                TextStyle(fontWeight: FontWeight.w300, color: Colors.white60,fontSize: 12),
             children: [
               TextSpan(text: movie.Plot),
               TextSpan(
@@ -206,15 +206,15 @@ class MovieDetailsExtraPosters extends StatelessWidget {
                   fontWeight: FontWeight.bold)),
         ),
         Container(
-          height: 200.0,
+          height: 150.0,
           padding: EdgeInsets.symmetric(vertical: 8.0),
           child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 150,
+                      width: MediaQuery.of(context).size.width / 4,
+                      height: 100,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(posters[index]),
