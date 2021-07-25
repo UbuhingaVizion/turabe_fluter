@@ -15,16 +15,16 @@ class MovieListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Movies App"),
-        backgroundColor: Colors.blueGrey.shade900,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
-      backgroundColor: Colors.blueGrey.shade900,
+      backgroundColor: Theme.of(context).primaryColor,
       body: ListView.builder(
           itemCount: movieList.length,
           itemBuilder: (BuildContext context, int index) {
             return Stack(children: [
               Positioned(child: movieCard(movieList[index], context)),
               Positioned(
-                  top: 10.0,
+                  top: 4.0,
                   child: movieImage(getRandomElement(movieList[index].Images)))
             ]);
           }),
@@ -34,14 +34,16 @@ class MovieListView extends StatelessWidget {
   Widget movieCard(Movie movie, BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(left: 45.0),
+        decoration: BoxDecoration(border: Border(bottom: BorderSide.none)),
+        margin: EdgeInsets.only(left: 20.0),
         width: MediaQuery.of(context).size.width,
         height: 120.0,
         child: Card(
-          color: Colors.black45,
+          elevation: 12.0,
+          color: Colors.grey.shade900,
           child: Padding(
             padding: const EdgeInsets.only(
-                top: 8.0, bottom: 8.0, left: 54.0, right: 8.0),
+                top: 8.0, bottom: 8.0, left: 80.0, right: 8.0),
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Column(
@@ -54,10 +56,7 @@ class MovieListView extends StatelessWidget {
                       Flexible(
                         child: Text(
                           movie.Title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17.0,
-                              color: Colors.white),
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ),
                       Text(
@@ -113,9 +112,15 @@ class MovieListView extends StatelessWidget {
   Widget movieImage(String imageUrl) {
     return Container(
       width: 100.0,
-      height: 100.0,
+      height: 109.0,
       decoration: BoxDecoration(
-          shape: BoxShape.circle,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+            bottomRight: Radius.circular(10.0),
+          ),
           image: DecorationImage(
               image:
                   NetworkImage(imageUrl ?? 'https://via.placeholder.com/100'),
@@ -134,8 +139,9 @@ class MovieListViewDetails extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Title: ${movie.Title}"),
-          backgroundColor: Colors.blueGrey.shade600,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
+        backgroundColor: Theme.of(context).accentColor,
         body: ListView(
           children: [
             MovieDetailsThumbnail(
@@ -174,7 +180,7 @@ class _BillSplitterState extends State<BillSplitter> {
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
-        color: Colors.white,
+        color: Colors.grey.shade900,
         child: ListView(
           scrollDirection: Axis.vertical,
           padding: EdgeInsets.all(20.5),

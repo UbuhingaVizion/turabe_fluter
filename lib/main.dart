@@ -19,17 +19,19 @@ TextTheme _appTextTheme(TextTheme base) {
       .copyWith(
           headline1: base.headline1
               .copyWith(fontSize: 34.0, fontWeight: FontWeight.bold),
-          headline6: base.headline6.copyWith(fontSize: 18.0),
+          headline6: base.headline6.copyWith(fontSize: 14.0),
           button: base.button.copyWith(letterSpacing: 3.0),
-          caption: base.caption
-              .copyWith(fontWeight: FontWeight.w400, fontSize: 14.0),
+          caption: base.caption.copyWith(
+              fontWeight: FontWeight.w400,
+              fontSize: 14.0,
+              color: Colors.indigo),
           bodyText2: base.bodyText1.copyWith(
               fontSize: 17.0, fontFamily: "Lobster", color: Colors.white))
       .apply(fontFamily: "Lobster");
 }
 
 void main() => runApp(new MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
+      theme: _appTheme,
       debugShowCheckedModeBanner: false,
       home: MovieListView(),
     ));

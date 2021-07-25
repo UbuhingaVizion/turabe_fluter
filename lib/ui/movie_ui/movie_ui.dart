@@ -78,7 +78,7 @@ class MovieDetailsHeader extends StatelessWidget {
       children: [
         Text(
           "${movie.Year}, ${movie.Genre}",
-          style: TextStyle(fontWeight: FontWeight.w400, color: Colors.indigo),
+          style: Theme.of(context).textTheme.caption,
         ),
         Text(movie.Title,
             style: TextStyle(
@@ -87,7 +87,7 @@ class MovieDetailsHeader extends StatelessWidget {
                 fontSize: 32.0)),
         Text.rich(TextSpan(
             style:
-                TextStyle(fontWeight: FontWeight.w300, color: Colors.black54),
+                TextStyle(fontWeight: FontWeight.w300, color: Colors.white60),
             children: [
               TextSpan(text: movie.Plot),
               TextSpan(
@@ -155,9 +155,7 @@ class MovieField extends StatelessWidget {
         Text(
           "$field : ",
           style: TextStyle(
-              color: Colors.black87,
-              fontSize: 12.0,
-              fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold),
         ),
         Expanded(
             child: Text(
@@ -195,11 +193,10 @@ class MovieDetailsExtraPosters extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("More Movie Posters".toUpperCase(),
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold)),
+          child: Text(
+            "More Movie Posters".toUpperCase(),
+            style: Theme.of(context).textTheme.caption,
+          ),
         ),
         Container(
           height: 200.0,
