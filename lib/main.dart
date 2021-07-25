@@ -29,5 +29,7 @@ TextTheme _appTextTheme(TextTheme base) {
 }
 
 void main() => runApp(new MaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
+      debugShowCheckedModeBanner: false,
       home: MovieListView(),
     ));
