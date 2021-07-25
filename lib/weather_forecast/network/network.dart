@@ -11,7 +11,8 @@ class Network {
         '&APPID=' +
         ForecastUtil.appId +
         '&units=metric';
-    var response = await get(Uri.encodeFull(finalUrl));
+    var encodeFull = Uri.encodeFull(finalUrl);
+    var response = await get(encodeFull);
     print("Url : ${Uri.encodeFull(finalUrl)}");
     if (response.statusCode == 200) {
       return WeatherForecastModel.fromJson(json.decode(response.body));
