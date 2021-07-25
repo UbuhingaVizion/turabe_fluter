@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  youtube_player_flutter: ^8.0.0
   flutter:
     sdk: flutter
 

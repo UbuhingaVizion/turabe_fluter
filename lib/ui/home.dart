@@ -45,11 +45,16 @@ class MovieListView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),),
               contentPadding: EdgeInsets.all(8.0)
           ),
-          onSubmitted: (value){
+          // onSubmitted: (value){
+          //
+          //  // setState(() {
+          //    // _tipPercentage = newValue.round();
+          //  // });
+          // },
+          onChanged:(value){
 
-           // setState(() {
-             // _tipPercentage = newValue.round();
-           // });
+            searchFilm(value);
+
           },
         ),
       ),
@@ -160,7 +165,14 @@ class MovieListView extends StatelessWidget {
       ),
     );
   }
+
+ void searchFilm(String query) {
+   final  film= Movie.getMovies();
+final titlelow=film[1].Title.toLowerCase();
+
+  }
 }
+
 
 class MovieListViewDetails extends StatelessWidget {
   final Movie movie;
@@ -177,8 +189,8 @@ class MovieListViewDetails extends StatelessWidget {
         body: ListView(
 
           children: [
-            MovieDetailsThumbnail(
-              thumbnail: getRandomElement(movie.Images),
+            MovieDetailsYoutibe(
+              url: movie.Poster,
             ),
             MovieDetailsHeaderWithPoster(
               movie: movie,

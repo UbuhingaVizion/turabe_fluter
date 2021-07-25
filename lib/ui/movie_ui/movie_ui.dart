@@ -1,11 +1,28 @@
+
 import 'package:first_flutter_app/model/movie.dart';
 import 'package:first_flutter_app/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsThumbnail extends StatelessWidget {
   final String thumbnail;
+   static YoutubePlayerController controller;
+
 
   const MovieDetailsThumbnail({Key key, this.thumbnail}) : super(key: key);
+
+  void ruYoutubePlayer(){
+    controller=YoutubePlayerController(
+        initialVideoId: YoutubePlayer.convertUrlToId(thumbnail),
+    flags: YoutubePlayerFlags(
+       enableCaption: false,
+      autoPlay: true,
+      isLive:false,
+      mute: false,
+    ));
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +35,15 @@ class MovieDetailsThumbnail extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 120.0,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: NetworkImage(thumbnail),
-                fit: BoxFit.cover,
-              )),
+              decoration:runYoutubePlayer()
+              // BoxDecoration (
+              //     image: DecorationImage(
+              //   image: NetworkImage(thumbnail),
+              //   fit: BoxFit.cover,
+              // )
+
+              // ),
+              ,
             ),
             Icon(
               Icons.play_circle_outline,
@@ -42,7 +63,103 @@ class MovieDetailsThumbnail extends StatelessWidget {
       ],
     );
   }
+
+  runYoutubePlayer() {
+    return BoxDecoration(
+
+    );
+  }
 }
+
+class MovieDetailsYoutibe extends StatefulWidget {
+  final String url;
+
+  const MovieDetailsYoutibe({Key key,this.url}) : super(key: key);
+
+  @override
+  _MovieDetailsYoutibeState createState() => _MovieDetailsYoutibeState();
+}
+
+class _MovieDetailsYoutibeState extends State<MovieDetailsYoutibe> {
+
+  YoutubePlayerController _controller;
+  void ruYoutubePlayer(){
+    _controller=YoutubePlayerController(
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.url),
+        flags: YoutubePlayerFlags(
+          enableCaption: false,
+          autoPlay: true,
+          isLive:false,
+          mute: false,
+        ));
+
+  }
+
+@override
+  void initState() {
+    // TODO: implement initState
+  ruYoutubePlayer();
+    super.initState();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.dispose();
+    super.dispose();
+  }
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return YoutubePlayerBuilder(
+        player: YoutubePlayer(
+          controller: _controller,
+        ), builder: (context,player){
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 120.0,
+                    child: player,
+                    decoration: BoxDecoration (
+                    //     image: DecorationImage(
+                    //   image: NetworkImage(thumbnail),
+                    //   fit: BoxFit.cover,
+                    // )
+
+                     ),
+
+                  ),
+                  // Icon(
+                  //   Icons.play_circle_outline,
+                  //   size: 80.0,
+                  //   color: Colors.white60,
+                  // ),
+                ],
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Color(0x00f5f5f5), Color(0xfff5f5f5)],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)),
+                height: 20.0,
+              )
+            ],
+          );
+    });
+  }
+}
+
 
 class MovieDetailsHeaderWithPoster extends StatelessWidget {
   final Movie movie;
@@ -88,7 +205,7 @@ class MovieDetailsHeader extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.cyan,
-                fontSize: 32.0)),
+                fontSize: 22.0)),
         Text.rich(TextSpan(
             style:
                 TextStyle(fontWeight: FontWeight.w300, color: Colors.white60,fontSize: 12),
