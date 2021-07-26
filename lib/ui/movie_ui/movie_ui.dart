@@ -161,7 +161,9 @@ class MovieField extends StatelessWidget {
             child: Text(
           value,
           style: TextStyle(
-              color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w300),
+              color: Colors.white54,
+              fontSize: 13.0,
+              fontWeight: FontWeight.w300),
         ))
       ],
     );
